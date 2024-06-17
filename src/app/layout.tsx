@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Script from 'next/script';
+import Head from 'next/head';
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const tgScript = "https://telegram.org/js/telegram-web-app.js";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <Head>
+      {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+      <script src={tgScript} />
+    </Head>
+    <body className={inter.className}>{children}</body>
+    {/*<Script*/}
+    {/*  src={tgScript}*/}
+    {/*  strategy="beforeInteractive"*/}
+    {/*/>*/}
     </html>
   );
 }
